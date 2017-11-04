@@ -102,4 +102,8 @@ body {
   background-color: #ccc;
   text-align: center;
 }
+.hiddenDiv{
+overflow:hidden;
+height:50px;
+}
 </style>

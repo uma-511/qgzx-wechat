@@ -9,10 +9,9 @@
     @on-focus="onFocus"
     @on-submit="onSubmit"
     ref="search"></search>
-    <card>
     <div slot="content" >
     	<div class="wrapper" >
-         	<div class="nav-item" :class='{active: tabIndex == nowIndex}' v-for='(tabItem,tabIndex) in tabParams' @click='tabToggle(tabIndex)'>
+         	<div class="nav-item" :key="tabIndex" :class='{active: tabIndex == nowIndex}' v-for='(tabItem,tabIndex) in tabParams' @click='tabToggle(tabIndex)'>
              <span :class='{dropdownBtn: tabIndex == 0}' >{{tabItem.value}}&nbsp;<img src="static/down-gray.png" width="12" height="12" v-if='nowIndex!=tabIndex'/><img src="static/up-green.png" width="12" height="12" v-if='nowIndex==tabIndex'/></span>
          	</div>
     	</div>
@@ -23,7 +22,6 @@
             </ul>
          </div>
     </div>
-    </card>
     <div>
     <div class="overlayer" @touchmove.prevent v-if="dropdownActive"></div>
     <group gutter="0">

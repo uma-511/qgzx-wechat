@@ -24,7 +24,7 @@ Vue.use(VueRouter)
  */
 const domainName = 'qgzx.tunnel.qydev.com'
 const serverName = 'qgzx.tunnel.qydev.com'
-const apiPrefix = 'http://' + serverName + '/QingongzhuxueSystem-PHP'
+const apiPrefix = 'http://' + serverName + '/qgzx'
 const loginTimeOutErrorCode = 'login_timeout_error'
 /**
  * 设置vuex
@@ -192,6 +192,12 @@ const routes = [{
   component: function (resolve) {
     require(['./components/grzx/Wdzl.vue'], resolve)
   }
+},
+{
+  path: '/components/grzx/Wdtz',
+  component: function (resolve) {
+    require(['./components/grzx/Wdtz.vue'], resolve)
+  }
 }
 ]
 
@@ -227,8 +233,8 @@ Vue.prototype.http = function (opts) {
     text: 'Loading'
   })
   console.log(apiPrefix + opts.url)
-  console.log(opts.params)
-  console.log(opts.data)
+  console.log(JSON.stringify(opts.params))
+  console.log(JSON.stringify(opts.data))
 //  测试代码
   vue.$http({
     method: opts.method,
@@ -236,7 +242,15 @@ Vue.prototype.http = function (opts) {
     headers: opts.headers || {},
     params: opts.params || {},
     data: opts.data || {},
-    emulateJSON: true
+    emulateJSON: true,
+    _timeout: 3000,
+    onTimeout: (request) => {
+      vue.$vux.loading.hide()
+      vue.$vux.alert.show({
+        title: '提示',
+        content: '系统繁忙，请稍后再试'
+      })
+    }
   }).then(function (response) {
     console.log(response)
     if (response.data.code === 200) {

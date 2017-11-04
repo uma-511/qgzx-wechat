@@ -3,11 +3,8 @@
   <box gap="10px 10px" >
   
    <flexbox >
-         <flexbox-item :span="3">
-          <div style="font-size:14px;">帖子数：{{count}}</div>
-        </flexbox-item>
-         <flexbox-item>
-         <div style="font-size:14px;"></div>
+         <flexbox-item :span="6">
+          <div style="font-size:14px;">我的帖子数：{{count}}</div>
         </flexbox-item>
         <flexbox-item style="padding-left:20px;">
           <router-link to="/components/grzx/Wyft"><div style="font-size:14px;" class="textcell" >创建我的帖子</div></router-link>
@@ -86,8 +83,7 @@ export default {
   },
   created: function () {
     // this.closeShowBack()
-    this.updateTitle('社区分享')
-    this.category_id = this.$route.query.category_id
+    this.updateTitle('我的帖子')
     this.data.stu_id = this.GLOBAL.student.id
     this.getData()
   },
@@ -104,8 +100,8 @@ export default {
     getData () {
       let vue = this
       vue.post({
-        url: '/public/api/share/getSort',
-        params: {'category_id': vue.category_id, theme: vue.theme},
+        url: '/public/api/share/community_check',
+        params: {'student_id': vue.GLOBAL.student.id, theme: vue.theme},
         success: function (data) {
           vue.lists = data.list
           vue.count = data.data.count
@@ -134,11 +130,12 @@ export default {
   },
   data () {
     return {
+      results: [],
+      theme: '',
       showWq: false,
       count: '0',
-      theme: '',
       data: { share_id: '', stu_id: '', content: '' },
-      lists: [{}]
+      lists: []
     }
   }
 }

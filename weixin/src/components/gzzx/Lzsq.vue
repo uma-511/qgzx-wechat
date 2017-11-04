@@ -20,13 +20,12 @@
      </box>
      </div>
    <group title="请认真填写以下内容">
-      <x-input title="离职原因" v-model="data.lzyy" required></x-input>
-       <datetime v-model="data.lgtime"  title="预计离岗时间"   ></datetime>
-       <selector title="有无欠款" v-model="data.ywqk" :options="ywArr"></selector>
-		<x-textarea title="备注" v-model="data.bz" required></x-textarea>
+      <x-input title="离职原因" v-model="data.reason" required></x-input>
+       <datetime v-model="data.dimission_time"  title="预计离岗时间"   required></datetime>
+		<x-textarea title="备注" v-model="data.remark" ></x-textarea>
   	  </group>
   	  <div style="width:100%;text-align:center;">
-<x-button  style="width:90%;margin-top:20px;margin-bottom:20px;"  mini type="primary" @click.native="">申请</x-button>
+<x-button  style="width:90%;margin-top:20px;margin-bottom:20px;"  mini type="primary" @click.native="lzsq">申请</x-button>
   	  </div>
   </div>
 </template>
@@ -66,12 +65,39 @@ export default {
           vue.lists = data1
         }
       })
+    },
+    lzsq () {
+      let vue = this
+      vue.data.student_id = vue.GLOBAL.student.id
+      if (vue.data.reason === '') {
+        vue.$vux.alert.show({
+          title: '提示',
+          content: '您还未填写离职原因'
+        })
+        return
+      }
+      if (vue.data.dimission_time === '') {
+        vue.$vux.alert.show({
+          title: '提示',
+          content: '您还未填写预计离岗时间'
+        })
+        return
+      }
+      vue.post({
+        url: '/public/api/Share/dismission',
+        data: vue.data,
+        success: function (data) {
+          vue.$vux.toast.show({
+            text: '离职申请成功，请等待审核'
+          })
+          vue.$router.push({path: '/components/grzx/Grzxmain'})
+        }
+      })
     }
   },
   data () {
     return {
-      ywArr: [{key: '1', value: '有'}, {key: '2', value: '无'}],
-      data: { lzyy: '', lgtime: '', bz: '', ywqk: '' }
+      data: { student_id: '', reason: '', dimission_time: '', remark: '' }
     }
   }
 }
