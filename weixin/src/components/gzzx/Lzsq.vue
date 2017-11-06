@@ -1,6 +1,6 @@
 <template>
   <div class="contentDiv">
-  
+
   <div style="background-color:#FFFFFF;border-bottom:1px solid #EEEEEE">
   <box gap="10px 10px" >
    <flexbox >
@@ -8,14 +8,14 @@
           <div class="circle"><img src="static/woman.png" width="35" height="35" style="margin-top:5px;"/></div>
         </flexbox-item>
          <flexbox-item :span="3" >
-          <div style="text-align:left;width:100%;">欧阳卓</div>
+          <div style="text-align:left;width:100%;">{{currInfo.stu_name}}</div>
         </flexbox-item>
-        <flexbox-item>
+        <!-- <flexbox-item>
           <div class="textcell">已赚取3000元</div>
-        </flexbox-item>
+        </flexbox-item> -->
       </flexbox>
-     <div style="margin-top:10px;"> <div style="font-size:12px;margin-bottom:2px;">已工作：678天</div>
-     <div style="font-size:12px;margin-bottom:2px;">任职公司：佛山阿帕帕科技有限公司</div>
+     <div style="margin-top:10px;"> <!-- <div style="font-size:12px;margin-bottom:2px;">已工作：678天</div> -->
+     <div style="font-size:12px;margin-bottom:2px;">任职公司：{{currInfo.currComp}}</div>
      </div>
      </box>
      </div>
@@ -56,13 +56,10 @@ export default {
     getData () {
       let vue = this
       vue.post({
-        url: '/dishui/zjsxhQuery',
-        params: {'cxbj': '1', 'paraval': '913305005633351465', 'paramc': 'nsrsbh'},
+        url: '/public/api/person/getCurrInfo',
+        params: {'student_id': vue.GLOBAL.student.id},
         success: function (data) {
-          let data1 = [{'gwmc': 'java程序员', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '1', 'sfrm': '1', 'gzxxdd': '', 'zwms': '', sfyp: '1'},
-            {'gwmc': '美工', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '2', 'sfrm': '0', 'gzxxdd': '', 'zwms': '', sfyp: '1'},
-            {'gwmc': '需求工程师', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '1', 'sfrm': '0', 'gzxxdd': '', 'zwms': '', sfyp: '1'}]
-          vue.lists = data1
+          vue.currInfo = data.data
         }
       })
     },
@@ -84,7 +81,7 @@ export default {
         return
       }
       vue.post({
-        url: '/public/api/Share/dismission',
+        url: '/public/api/share/dismission',
         data: vue.data,
         success: function (data) {
           vue.$vux.toast.show({
@@ -97,7 +94,8 @@ export default {
   },
   data () {
     return {
-      data: { student_id: '', reason: '', dimission_time: '', remark: '' }
+      data: { student_id: '', reason: '', dimission_time: '', remark: '' },
+      currInfo: { stu_name: '', currComp: '', current_time: '' }
     }
   }
 }

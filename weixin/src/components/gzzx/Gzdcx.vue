@@ -1,6 +1,6 @@
 <template>
   <div class="contentDiv">
-  
+
   <div style="background-color:#FFFFFF;border-bottom:1px solid #EEEEEE">
   <box gap="10px 10px" >
    <flexbox >
@@ -8,24 +8,24 @@
           <div class="circle"><img src="static/woman.png" width="35" height="35" style="margin-top:5px;"/></div>
         </flexbox-item>
          <flexbox-item :span="3" >
-          <div style="text-align:left;width:100%;">欧阳卓</div>
+          <div style="text-align:left;width:100%;">{{data.stu_name}}</div>
         </flexbox-item>
         <flexbox-item>
-          <div class="textcell">日期：2017-10-18</div>
+          <div class="textcell">日期：{{data.current_time}}</div>
         </flexbox-item>
       </flexbox>
      <div style="margin-top:10px;"> <div style="font-size:12px;margin-bottom:2px;"></div></div>
      </box>
      </div>
    <group title="请输入查询条件">
-      <datetime v-model="starttime" @on-change="change" title="开始时间"></datetime>
-      <datetime v-model="endtime" @on-change="change" title="结束时间"></datetime>
+      <datetime v-model="starttime" @on-change="startchange" title="开始月份" :end-date="maxMonth" :min-year="2017" :max-year="maxYear" format="YYYY-MM"></datetime>
+      <datetime v-model="endtime" @on-change="endchange" title="结束月份" :end-date="maxMonth" :min-year="2017" :max-year="maxYear" format="YYYY-MM" :min-date="starttime"></datetime>
     </group>
-    
+
      <group title="工资单">
-      <cell  v-for="item in list" v-bind:title="item.rq" :value="'工资：'+item.gz+'元'" is-link link="/components/gzzx/Gzdxq"></cell>    
+      <cell  v-for="item in list" v-bind:title="item.rq" :value="'工资：'+item.gz+'元'" is-link link="/components/gzzx/Gzdxq"></cell>
     </group>
-          
+
   </div>
 </template>
 
@@ -52,25 +52,81 @@ export default {
     getData () {
       let vue = this
       vue.post({
-        url: '/dishui/zjsxhQuery',
-        params: {'cxbj': '1', 'paraval': '913305005633351465', 'paramc': 'nsrsbh'},
+        url: '/public/api/person/getSalary',
+        params: {'student_id': vue.GLOBAL.student.id, 'start_time': '', 'end_time': ''},
         success: function (data) {
-          let data1 = [{'gwmc': 'java程序员', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '1', 'sfrm': '1', 'gzxxdd': '', 'zwms': '', sfyp: '1'},
-            {'gwmc': '美工', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '2', 'sfrm': '0', 'gzxxdd': '', 'zwms': '', sfyp: '1'},
-            {'gwmc': '需求工程师', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '1', 'sfrm': '0', 'gzxxdd': '', 'zwms': '', sfyp: '1'}]
-          vue.lists = data1
+          vue.data = data.data
+          vue.list = data.list
+        }
+      })
+      // vue.post({
+      //   url: '/dishui/zjsxhQuery',
+      //   params: {'cxbj': '1', 'paraval': '913305005633351465', 'paramc': 'nsrsbh'},
+      //   success: function (data) {
+      //     let data1 = [{'gwmc': 'java程序员', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '1', 'sfrm': '1', 'gzxxdd': '', 'zwms': '', sfyp: '1'},
+      //       {'gwmc': '美工', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '2', 'sfrm': '0', 'gzxxdd': '', 'zwms': '', sfyp: '1'},
+      //       {'gwmc': '需求工程师', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '1', 'sfrm': '0', 'gzxxdd': '', 'zwms': '', sfyp: '1'}]
+      //     vue.lists = data1
+      //   }
+      // })
+    },
+    startchange () {
+      // this.data.starttime = '2016-09-10'
+    },
+    endchange () {
+      let vue = this
+      vue.post({
+        url: '/public/api/person/getSalary',
+        params: {'student_id': vue.GLOBAL.student.id, 'start_time': vue.starttime, 'end_time': vue.endtime},
+        success: function (data) {
+          vue.data = data.data
+          vue.list = data.list
         }
       })
     },
-    change () {
-      this.data.starttime = '2016-09-10'
+    getThisMonth () {
+      let now = new Date()
+      let cmonth = now.getMonth() + 1
+      let day = now.getDate()
+      if (cmonth < 10) cmonth = '0' + cmonth
+      if (day < 10) day = '0' + day
+      return now.getFullYear() + '-' + cmonth + '-' + day
+    },
+    getPreMonth () {
+      let now = new Date()
+      let cmonth = now.getMonth()
+      // let day = now.getDate()
+      if (cmonth < 10) cmonth = '0' + cmonth
+      // if (day < 10) day = '0' + day
+      return now.getFullYear() + '-' + cmonth
+    },
+    setToday () {
+      let now = new Date()
+      let cmonth = now.getMonth()
+      let day = now.getDate()
+      if (cmonth < 10) cmonth = '0' + cmonth
+      if (day < 10) day = '0' + day
+      // this.value7 = now.getFullYear() + '-' + cmonth + '-' + day
+      // console.log('set today ok')
+      return now.getFullYear() + '-' + cmonth + '-' + day
+    },
+    thisYear () {
+      let now = new Date()
+      return now.getFullYear()
     }
   },
   data () {
+    // let thisMonth = this.getThisMonth()
+    let preMonth = this.getPreMonth()
+    let maxDate = this.setToday()
+    let my = this.thisYear()
     return {
-      starttime: '',
-      endtime: '',
-      list: [ { rq: '2017-08', gz: '300' }, { rq: '2017-09', gz: '300' }, { rq: '2017-10', gz: '400' } ]
+      maxYear: my,
+      starttime: preMonth,
+      endtime: preMonth,
+      maxMonth: maxDate,
+      list: [ { rq: '2017-08', gz: '300' }, { rq: '2017-09', gz: '300' }, { rq: '2017-10', gz: '400' } ],
+      data: { stu_name: '', current_time: '' }
     }
   }
 }
