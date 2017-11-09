@@ -25,11 +25,11 @@
     ref="search"></search>
   
     <group gutter="0">
-      <cell    v-for="item in lists"  style="border-top:0px;">
+      <cell    v-for="(item,index) in lists"  style="border-top:0px;">
        <span slot="title" ><img src="static/woman.png" width="18" height="18" style="vertical-align:middle;"/>&nbsp;&nbsp;<span style="vertical-align:middle;font-size:16px;color:#09BB07">{{item.name}}：<span style="color:black;font-size:14px;">{{item.theme}}</span></span></span>
        <div slot="inline-desc">
-       <div style="font-size:12px;padding-top:2px;padding-bottom:0px;padding-left:25px;color:black;"><div v-bind:class="{ hiddenDiv: item.content.length>50 && !item.yes}" >{{item.content}}</div></div>
-       <div style="color:#09BB07;padding-left:25px;font-size:12px;padding-top:2px;padding-bottom:2px;" v-on:click="item.yes=!item.yes"><span v-if="item.content.length>50 && !item.yes" >全文</span><span v-if="item.yes" >收起</span></div>
+       <div style="font-size:12px;padding-top:2px;padding-bottom:0px;padding-left:25px;color:black;word-break:break-all"><div v-bind:class="{ hiddenDiv: item.content.length>50 && !flag[index]}" >{{item.content}}</div></div>
+       <div style="color:#09BB07;padding-left:25px;font-size:12px;padding-top:2px;padding-bottom:2px;" @click="flagChange(index)"><span v-if="item.content.length>50 && !flag[index]" >全文</span><span v-if="flag[index]" >收起</span></div>
        <div style="padding-left:25px;font-size:10px;">{{item.releasetime}}</div>
        <div style="width:100%;text-align:right;padding-bottom:10px;"><img src="static/mytalk.png" width="18" height="18" v-on:click="talk(item.id)"/></div>
         <div style="background-color:#EFEFF4;margin-left:25px;font-size:12px;padding:6px;border-radius: 5px;" v-if="item.data.list.length>0">
@@ -95,6 +95,11 @@ export default {
     onSubmit () {
       this.getData()
     },
+    flagChange (index) {
+      this.flag[index] = !this.flag[index]
+      this.$set(this.flag, index, this.flag[index])
+      console.log(this.flag[index])
+    },
     onCancel () {
       if (this.theme !== '') {
         this.theme = ''
@@ -138,7 +143,8 @@ export default {
       count: '0',
       theme: '',
       data: { share_id: '', stu_id: '', content: '' },
-      lists: [{}]
+      lists: [{}],
+      flag: []
     }
   }
 }
