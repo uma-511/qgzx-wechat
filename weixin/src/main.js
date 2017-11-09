@@ -24,7 +24,7 @@ Vue.use(VueRouter)
  */
 const domainName = 'qgzx.tunnel.qydev.com'
 const serverName = 'qgzx.tunnel.qydev.com'
-const apiPrefix = 'http://' + serverName + '/qgzx'
+const apiPrefix = 'http://' + serverName + '/QingongzhuxueSystem-PHP'
 const loginTimeOutErrorCode = 'login_timeout_error'
 /**
  * 设置vuex

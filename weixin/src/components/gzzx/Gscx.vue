@@ -78,16 +78,6 @@ export default {
           vue.data = data.data
         }
       })
-      // vue.post({
-      //   url: '/dishui/zjsxhQuery',
-      //   params: {'cxbj': '1', 'paraval': '913305005633351465', 'paramc': 'nsrsbh'},
-      //   success: function (data) {
-      //     let data1 = [{'gwmc': 'java程序员', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '1', 'sfrm': '1', 'gzxxdd': '', 'zwms': '', sfyp: '1'},
-      //       {'gwmc': '美工', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '2', 'sfrm': '0', 'gzxxdd': '', 'zwms': '', sfyp: '1'},
-      //       {'gwmc': '需求工程师', 'gzdd': '佛山市-南海区', 'ggmc': '佛山阿啪啪信息科技有限公司', 'cx': '8千-1万', 'fbsj': '2017-09-09', 'gwxz': '1', 'sfrm': '0', 'gzxxdd': '', 'zwms': '', sfyp: '1'}]
-      //     vue.lists = data1
-      //   }
-      // })
     },
     change () {
       let vue = this

@@ -4,26 +4,23 @@
       <div slot="content" class="cardContent">
       	<div class="title"><img src="static/notice.png" width="18" height="18" />&nbsp;<span>建议须知：</span></div>
  		<div>
- 		    1、哈哈哈哈哈哈<br/>
-			2、啊哈嗲行点击案例集大吉大利<br/>
-			3、哈哈哈哈哈哈<br/>
-			4、啊哈嗲行点击案例集大吉大利<br/>
+ 		    1、请文明建议；<br/>
 	   </div>
       </div>
     </card>
 	  <group>
-    	<x-input title="建议主题" v-model="data.xm" required placeholder="请输入"></x-input>
-        <x-textarea title="建议内容" v-model="data.bz" required></x-textarea>
+    	<x-input title="建议主题" v-model="data.option_title" required placeholder="请输入"></x-input>
+        <x-textarea title="建议内容" v-model="data.option_content" required></x-textarea>
   	  </group>
-	 <button-tab style="margin:20px;" >
-        <button-tab-item selected>提交</button-tab-item>
-      </button-tab>  
+             	   	  <div style="width:100%;text-align:center;">
+<x-button  style="width:90%;margin-top:20px;margin-bottom:20px;"  mini type="primary" @click.native="jytj">提交</x-button>
+  	  </div>
 	
   	</div>
 </template>
 
 <script>
-import { Group, Cell, Divider, Badge, Card, ButtonTab, ButtonTabItem, XInput, Checklist, Radio, XTextarea, Selector } from 'vux'
+import { Group, Cell, Divider, Badge, Card, ButtonTab, ButtonTabItem, XInput, Checklist, Radio, XTextarea, Selector, XButton } from 'vux'
 
 export default {
   components: {
@@ -38,20 +35,45 @@ export default {
     Checklist,
     Radio,
     XTextarea,
-    Selector
+    Selector,
+    XButton
   },
   created: function () {
     this.updateTitle('我要建议')
   },
   methods: {
-    change (val, label) {
-      console.log('change', val, label)
+    jytj () {
+      let vue = this
+      if (vue.data.option_title === '') {
+        vue.$vux.alert.show({
+          title: '提示',
+          content: '您还没填写建议标题'
+        })
+        return
+      }
+      if (vue.data.option_content === '') {
+        vue.$vux.alert.show({
+          title: '提示',
+          content: '您还未填写建议内容'
+        })
+        return
+      }
+      vue.post({
+        url: '/public/api/person/addSuggest',
+        data: vue.data,
+        success: function (data) {
+          console.log('成功')
+          vue.$vux.toast.show({
+            text: '建议提交成功'
+          })
+          vue.$router.push({path: '/components/grzx/Wdjy'})
+        }
+      })
     }
   },
   data () {
     return {
-      data: {bklb: '1', 'xm': 'java程序员', 'xb': '1', 'xh': '02340', 'sfzh': '4304321232324424', 'yhk': '4423424234324234234'},
-      options: [{key: '1', value: '工作心得'}, {key: '2', value: '工作趣事'}, {key: '3', value: '校园生活'}]
+      data: {student_id: this.GLOBAL.student.id, 'option_title': '', 'option_content': ''}
     }
   }
 }
