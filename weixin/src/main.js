@@ -52,7 +52,7 @@ store.registerModule('vux', {
 const routes = [{
   path: '/',
   component: function (resolve) {
-    require(['./components/zpzx/Gwss.vue'], resolve)
+    require(['./components/grzx/Grzxmain.vue'], resolve)
   }
 },
 {

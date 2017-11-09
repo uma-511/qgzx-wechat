@@ -5,16 +5,16 @@
       <span slot="title" style="font-size:14px;">工作签到</span>
       <div slot="icon" ><img src="static/check.png" width="20" height="20" style="padding-top:5px;"/>&nbsp;&nbsp;</div>
       </cell>
-       <cell  link="/components/gzzx/Gscx" >
+       <cell  link="/components/gzzx/Gscx" :disabled="disabled">
       <span slot="title" style="font-size:14px;">考勤情况</span>
       <div slot="icon" ><img src="static/clock.png" width="20" height="20" style="padding-top:5px;"/>&nbsp;&nbsp;</div>
       </cell>
-       <cell  link="/components/gzzx/Gzdcx">
+       <cell  link="/components/gzzx/Gzdcx" :disabled="disabled">
       <span slot="title" style="font-size:14px;">工资单</span>
       <div slot="icon" ><img src="static/result.png" width="20" height="20" style="padding-top:5px;"/>&nbsp;&nbsp;</div>
       </cell>
              <cell  link="/components/gzzx/Ywsq" :disabled="disabled">
-      <span slot="title" style="font-size:14px;">办事申请</span>
+      <span slot="title" style="font-size:14px;">考勤补签</span>
       <div slot="icon" ><img src="static/work.png" width="20" height="20" style="padding-top:5px;"/>&nbsp;&nbsp;</div>
       </cell>
        <cell  link="/components/gzzx/Lzsq" :disabled="disabled">

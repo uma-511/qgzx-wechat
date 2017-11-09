@@ -7,11 +7,11 @@
         <img slot="icon" src="static/menumain-gray.png" v-if="nowIndex!=1"/><img slot="icon" src="static/menumain-green.png" v-if="nowIndex==1"/>
         <span slot="label" >工作中心</span>
       </tabbar-item>
-      <tabbar-item selected @on-item-click="menuTo(2)">
+      <tabbar-item  @on-item-click="menuTo(2)">
         <img slot="icon" src="static/searchmain-green1.png" v-if="nowIndex==2"><img slot="icon" src="static/searchmain-gray1.png" v-if="nowIndex!=2"/>
         <span slot="label">招聘中心</span>
       </tabbar-item>
-      <tabbar-item  @on-item-click="menuTo(3)" >
+      <tabbar-item  @on-item-click="menuTo(3)" selected>
         <img slot="icon" src="static/usermain-gray1.png" v-if="nowIndex!=3"><img slot="icon" src="static/usermain-green1.png" v-if="nowIndex==3"/>
         <span slot="label">个人中心</span>
       </tabbar-item>
@@ -39,10 +39,32 @@ export default {
     menuTo (index) {
       console.log('change')
       this.nowIndex = index
+      let disabled = false
+      if (this.GLOBAL.student.status === '正常') {
+        if (this.GLOBAL.student.check_status === '未注册') {
+          disabled = true
+        }
+      } else {
+        disabled = true
+      }
       if (index === 1) {
+        if (disabled) {
+          this.$vux.alert.show({
+            title: '提示',
+            content: '请先注册'
+          })
+          return
+        }
         this.$router.push({ path: '/components/gzzx/Gzzxmain' })
       } else if (index === 2) {
-        this.$router.push({ path: '/' })
+        if (disabled) {
+          this.$vux.alert.show({
+            title: '提示',
+            content: '请先注册'
+          })
+          return
+        }
+        this.$router.push({ path: '/components/zpzx/Gwss' })
       } else if (index === 3) {
         this.$router.push({ path: '/components/grzx/Grzxmain' })
       }
@@ -60,7 +82,7 @@ export default {
   },
   data () {
     return {
-      nowIndex: 2
+      nowIndex: 3
     }
   },
   computed: {

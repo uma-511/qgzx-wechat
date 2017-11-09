@@ -23,11 +23,12 @@
        <flexbox-item :span="3">
       	 <flow orientation="vertical" style="height:200px;">
           <flow-state state="上" v-bind:title="'上班'" is-done v-if="data.come_time==''"></flow-state>
-          <flow-state state="上" v-bind:title="'到岗时间:'+data.come_time"  v-if="data.come_time!=''">
+          <flow-state state="上" v-bind:title="'到岗时间:'+data.current_time+' '
+          +data.come_time"  v-if="data.come_time!=''">
           </flow-state>
           <flow-line v-bind:is-done="data.qdstatue!=2"></flow-line>     
          <flow-state state="下" v-bind:title="'下班'" is-done v-if="data.leave_time=='' || data.leave_time==null"></flow-state>
-         <flow-state state="下" v-bind:title="'离岗时间:'+data.leave_time"  v-if="data.leave_time!='' && data.leave_time!=null"></flow-state>
+         <flow-state state="下" v-bind:title="'离岗时间:'+data.current_time+' '+data.leave_time"  v-if="data.leave_time!='' && data.leave_time!=null"></flow-state>
         </flow>
         <div style="height:40px;"></div>
       </flexbox-item>
@@ -38,14 +39,14 @@
         </flexbox-item>
       	 <flexbox-item>
         	<x-button  type="primary" style="height:50px;width:120px;" @click.native="dgqd" v-if="data.come_time==''">到岗签到</x-button>
-        	<div v-if="data.come_time!=''" style="font-size:12px;"><img src="static/location.png" width="12" height="16" />&nbsp;佛山市南海区深海路17号瀚天科技城</div>
+        	<div v-if="data.come_time!=''" style="font-size:12px;">&nbsp;</div>
         </flexbox-item>
         <flexbox-item>
         	<div style="height:150px;"></div>
         </flexbox-item>
               	 <flexbox-item>
         	<x-button  type="primary" style="height:50px;width:120px;"  @click.native="lgqd"  v-if="(data.leave_time=='' || data.leave_time==null) && data.come_time!='' && data.come_time!=null">离岗签到</x-button>
-        	<div v-if="data.leave_time!=''  && data.leave_time!=null" style="font-size:12px;"><img src="static/location.png" width="12" height="16" />&nbsp;佛山市南海区深海路17号瀚天科技城</div>
+        	<div v-if="data.leave_time!=''  && data.leave_time!=null" style="font-size:12px;">&nbsp;</div>
         </flexbox-item>
         </flexbox>
       </flexbox-item>
