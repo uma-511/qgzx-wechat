@@ -22,9 +22,9 @@ Vue.use(VueRouter)
 /**
  * 定义常量
  */
-const domainName = 'qgzx.tunnel.qydev.com'
-const serverName = 'qgzx.tunnel.qydev.com'
-const apiPrefix = 'http://' + serverName + '/QingongzhuxueSystem-PHP'
+const domainName = 'tj6av9.natappfree.cc'
+const serverName = 'tj6av9.natappfree.cc'
+const apiPrefix = 'http://' + serverName + '/qgzx'
 const loginTimeOutErrorCode = 'login_timeout_error'
 /**
  * 设置vuex

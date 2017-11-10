@@ -41,10 +41,10 @@
     </group>
 <divider>到达底部了</divider>
 <div v-transfer-dom>
-      <x-dialog :show.sync="showWq" class="dialogs">
+      <x-dialog :show.sync="showWq" class="dialogs" >
         <div class="img-box">
              <group title="我的看法" style="margin-top:10px;">
-      			<x-textarea title="" v-model="data.content" required></x-textarea>
+      			<x-textarea title="" :autofocus="showWq" v-model="data.content" required  :max="200" ref="contentRef"></x-textarea>
     		</group>
     		<div>
     		<x-button  style="width:90%;margin-top:20px;margin-bottom:20px;"  mini type="primary" @click.native="addReply">提交</x-button>
@@ -121,6 +121,10 @@ export default {
       this.data.share_id = id
       this.data.content = ''
       this.showWq = true
+      let vue = this
+      setTimeout(function () {
+        vue.$refs.contentRef.focus()
+      })
     },
     addReply () {
       let vue = this

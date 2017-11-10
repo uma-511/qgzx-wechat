@@ -13,7 +13,7 @@
 	  <group>
 	  <selector title="板块类别" v-model="data.category_id" :options="options" required placeholder="请选择"></selector>
     	<x-input title="帖子主题" v-model="data.theme" required placeholder="请输入"></x-input>
-        <x-textarea title="帖子内容" v-model="data.content" required placeholder="请输入"></x-textarea>
+        <x-textarea title="帖子内容" v-model="data.content" required placeholder="请输入" :max="400"></x-textarea>
   	  </group>
        	   	  <div style="width:100%;text-align:center;">
 <x-button  style="width:90%;margin-top:20px;margin-bottom:20px;"  mini type="primary" @click.native="tzfb">提交</x-button>

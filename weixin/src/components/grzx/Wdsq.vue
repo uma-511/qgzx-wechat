@@ -34,7 +34,7 @@
       <cell is-link title="岗位名称" v-if="item.pid==tabItem.id" v-for="item in zlist" @click.native="onClickDetail(item.id)"  inline-desc='公司名称' style="border-top:0px;">
        <span slot="title" ><img src="static/zttalk.png" width="18" height="18" style="vertical-align:middle;"/>&nbsp;&nbsp;<span style="vertical-align:middle;font-size:16px;">{{item.name}}</span></span>
        <div slot="inline-desc"><div style="font-size:10px;padding-top:2px;padding-bottom:0px;padding-right:15px;">{{item.description}}</div></div>
-       <div slot="default" style="padding-right:10px;"><div style="font-size:14px;padding-bottom:5px;color:black;text-align:left;">帖子数：<span class="fontmian">{{item.zts}}</span></div></div>
+       <div slot="default" style="padding-right:10px;"><div style="font-size:14px;padding-bottom:5px;color:black;text-align:left;">帖子数：<span class="fontmian">{{item.total}}</span></div></div>
       	
       </cell>
     </group>
