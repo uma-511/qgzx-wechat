@@ -110,10 +110,20 @@
       </div>
   	  </cell>
   	  </group>
-  	  
+  	          <uploader
+    :max="1"
+    :images="images"
+    :handle-click="false"
+    :show-header="true"
+    :readonly="true"
+    upload-url="uploadUrl"
+    size="small" 
+    title="头像" 
+    @preview="previewMethod"
+  ></uploader>
          <uploader
     :max="max"
-    :images="images"
+    :images="attachfiles"
     :handle-click="false"
     :show-header="true"
     :readonly="true"
@@ -190,6 +200,8 @@ export default {
         params: {'id': vue.GLOBAL.student.id},
         success: function (data) {
           vue.data = data.data
+          vue.images = vue.data.image
+          vue.attachfiles = vue.data.attachfiles
           vue.jobdataArr = vue.data.jobdata
           vue.mondataArr = vue.data.mondata
           vue.tuedataArr = vue.data.tuedata
@@ -208,8 +220,8 @@ export default {
       data: {},
       options: [{key: 'male', value: '男'}, {key: 'female', value: '女'}],
       max: 5,
-      images: [{url: '/static/bq.png'}, {url: '/static/car.png'}],
-      uploadUrl: 'E:\\ygfworkspaces\\zfapp\\WebContent\\weixin\\static\\image',
+      images: [],
+      attachfiles: [],
       imgsrc: '',
       showTp: false,
       showChecker: '周一',

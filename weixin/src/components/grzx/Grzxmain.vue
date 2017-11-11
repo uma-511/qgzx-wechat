@@ -24,7 +24,7 @@
          <flexbox-item :span="3" >
           <div style="text-align:left;width:100%;color:#ccc;" v-if="data.status=='正常' && data.check_status!='提交' ">{{data.check_status}}
            </div>
-           <div style="text-align:left;width:100%;color:#ccc;" v-if="data.status=='正常' && data.check_status!='提交' ">审核中...
+           <div style="text-align:left;width:100%;color:#ccc;" v-if="data.status=='正常' && data.check_status=='提交' ">审核中...
            </div>
             <div style="text-align:left;width:100%;color:#ccc;" v-if="data.status!='正常'">{{data.status}}
            </div>

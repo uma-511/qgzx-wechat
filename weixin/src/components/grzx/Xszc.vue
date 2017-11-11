@@ -110,13 +110,25 @@
       </div>
   	  </cell>
   	  </group>
-         <uploader
-    :max="max"
+  	           <uploader
+    :max="1"
     :images="images"
     :handle-click="false"
     :show-header="true"
     :readonly="false"
-    upload-url="uploadUrl"
+    :upload-url="uploadUrl"
+    size="small" 
+    title="头像（请上传小一寸免冠照）" 
+    @preview="previewMethod"
+    @add-image="addImageMethod"
+  ></uploader>
+         <uploader
+    :max="max"
+    :images="attachfiles"
+    :handle-click="false"
+    :show-header="true"
+    :readonly="false"
+    :upload-url="uploadUrl"
     size="small" 
     title="佐证上传" 
     @preview="previewMethod"
@@ -282,6 +294,26 @@ export default {
       if (vue.data.sundata !== '') {
         vue.data.sundata = vue.data.sundata.substring(0, vue.data.sundata.length - 1)
       }
+      for (var img of vue.images) {
+        var url = ''
+        url = '/uploads' + img.url.split('uploads')[1]
+        vue.data.image = url
+      }
+      if (vue.data.image === '') {
+        vue.$vux.alert.show({
+          title: '提示',
+          content: '您还未上传图片'
+        })
+        return
+      }
+      for (var img1 of vue.attachfiles) {
+        var url1 = ''
+        url1 = '/uploads' + img1.url.split('uploads')[1]
+        vue.data.attachfiles = vue.data.attachfiles + url1 + ','
+      }
+      if (vue.data.attachfiles !== '') {
+        vue.data.attachfiles = vue.data.attachfiles.substring(0, vue.data.attachfiles.length - 1)
+      }
       vue.post({
         url: '/public/api/person/addStudent',
         data: vue.data,
@@ -316,11 +348,12 @@ export default {
   },
   data () {
     return {
-      data: {name: '', sex: 'male', id: '', student_xh: '', college_id: '', tel: '', nation: '35', medicaldata: '0', accidentdata: '0', jobdata: '', experience: '', mondata: '', tuedata: '', weddata: '', thudata: '', fridata: '', satdata: '', sundata: ''},
+      data: {name: '', sex: 'male', id: '', student_xh: '', college_id: '', tel: '', nation: '35', medicaldata: '0', accidentdata: '0', jobdata: '', experience: '', mondata: '', tuedata: '', weddata: '', thudata: '', fridata: '', satdata: '', sundata: '', image: '', attachfiles: ''},
       options: [{key: 'male', value: '男'}, {key: 'female', value: '女'}],
       max: 5,
-      images: [{url: '/static/bq.png'}, {url: '/static/car.png'}],
-      uploadUrl: 'E:\\ygfworkspaces\\zfapp\\WebContent\\weixin\\static\\image',
+      images: [],
+      attachfiles: [],
+      uploadUrl: this.apiPrefix + '/public/api/share/upload',
       imgsrc: '',
       showTp: false,
       xybhArr: [],
