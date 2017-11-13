@@ -200,8 +200,6 @@ export default {
         params: {'id': vue.GLOBAL.student.id},
         success: function (data) {
           vue.data = data.data
-          vue.images = vue.data.image
-          vue.attachfiles = vue.data.attachfiles
           vue.jobdataArr = vue.data.jobdata
           vue.mondataArr = vue.data.mondata
           vue.tuedataArr = vue.data.tuedata
@@ -210,6 +208,12 @@ export default {
           vue.fridataArr = vue.data.fridata
           vue.satdataArr = vue.data.satdata
           vue.sundataArr = vue.data.sundata
+          vue.images = [{url: vue.data.image}]
+          var imgs = vue.data.attachfiles.split(',')
+          for (var img of imgs) {
+            var item = {url: img}
+            vue.attachfiles.push(item)
+          }
           console.log('成功')
         }
       })

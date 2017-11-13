@@ -22,9 +22,9 @@ Vue.use(VueRouter)
 /**
  * 定义常量
  */
-const domainName = 'tj6av9.natappfree.cc'
-const serverName = 'tj6av9.natappfree.cc'
-const apiPrefix = 'http://' + serverName + '/qgzx'
+const domainName = '5dubgj.natappfree.cc'
+const serverName = '5dubgj.natappfree.cc'
+const apiPrefix = 'http://' + serverName + '/QingongzhuxueSystem-PHP'
 const loginTimeOutErrorCode = 'login_timeout_error'
 /**
  * 设置vuex
@@ -179,6 +179,12 @@ const routes = [{
   path: '/components/gzzx/Ywsqjl',
   component: function (resolve) {
     require(['./components/gzzx/Ywsqjl.vue'], resolve)
+  }
+},
+{
+  path: '/components/gzzx/Bqsq',
+  component: function (resolve) {
+    require(['./components/gzzx/Bqsq.vue'], resolve)
   }
 },
 {
@@ -363,7 +369,7 @@ Vue.prototype.getURLParam = function (strParamName) {
   }
   return strReturn
 }
-var global_ = {student: {'id': 9, 'student_id': '学号', 'openid': 'o-Out1Iy67LhFow6kRlIADP-uqDM', 'name': '姓名', 'sex': 'male', 'college_id': '学院号'}}
+var global_ = {student: {'id': 4, 'student_id': '学号', 'openid': 'o-Out1Iy67LhFow6kRlIADP-uqDM', 'name': '姓名', 'sex': 'male', 'college_id': '学院号'}}
 Vue.prototype.GLOBAL = global_
 /* eslint-disable no-new */
 new Vue({

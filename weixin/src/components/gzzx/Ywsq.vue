@@ -20,9 +20,10 @@
     <div style="background-color:#FFFFFF;margin-top:10px;margin-bottom:10px;border-top:1px solid #EEEEEE;border-bottom:1px solid #EEEEEE">
     <box gap="10px 10px">
       <flexbox :gutter="0" wrap="wrap">
-        <flexbox-item :span="4" align="center"><div class="boxdiv" @click="bq"><img src="static/bq.png" width="30" height="30"/><div >补签</div></div></flexbox-item>
-		<flexbox-item :span="4" align="center"><div class="boxdiv" @click="wq"><img src="static/wq.png" width="30" height="30"/><div >外勤</div></div></flexbox-item>
-		<flexbox-item :span="4" align="center"><div class="boxdiv" @click="qj" style="border-right:1px solid #9ED99D;"><img src="static/qj.png" width="30" height="30"/><div >请假</div></div></flexbox-item>
+        <flexbox-item :span="3" align="center"><div class="boxdiv" @click="bq"><img src="static/bq.png" width="30" height="30"/><div >补签</div></div></flexbox-item>
+		<!--<flexbox-item :span="3" align="center"><div class="boxdiv" @click="wq"><img src="static/wq.png" width="30" height="30"/><div >外勤</div></div></flexbox-item>
+		-->
+		<flexbox-item :span="3" align="center"><div class="boxdiv" @click="qj" style="border-right:1px solid #9ED99D;"><img src="static/qj.png" width="30" height="30"/><div >请假</div></div></flexbox-item>
 		<!--<flexbox-item :span="3" align="center"><div class="boxdiv"  @click="jb" style="border-right:1px solid #9ED99D;"><img src="static/jb.png" width="30" height="30"/><div>加班</div></div></flexbox-item>
     -->
     </flexbox>
@@ -30,7 +31,7 @@
        </div>
        <group gutter="0">
 
-      <cell is-link title="申请记录" link="/components/gzzx/Ywsqjl" >
+      <cell is-link title="申请记录"  @click.native="onClickDetail">
       <span slot='icon'><img src="static/menu.png" width="25" height="25"/>&nbsp;</span>
       </cell>
       </group>
@@ -110,6 +111,9 @@ export default {
     this.getData()
   },
   methods: {
+    onClickDetail () {
+      this.$router.push({path: '/components/gzzx/Ywsqjl', query: {initId: 1}})
+    },
     getData () {
       let vue = this
       vue.post({
@@ -121,7 +125,8 @@ export default {
       })
     },
     bq () {
-      this.showBq = true
+      // this.showBq = true
+      this.$router.push({ path: '/components/gzzx/Bqsq' })
     },
     wq () {
       this.showWq = true
