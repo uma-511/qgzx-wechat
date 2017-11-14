@@ -95,9 +95,10 @@ export default {
       let vue = this
       vue.post({
         url: '/public/api/person/getStuMessage',
-        params: {'code': vue.getURLParam('code')},
+        params: {'code': 'ss'},
         success: function (data) {
           vue.GLOBAL.student = data.data
+          vue.data = data.data
           vue.getDis()
         }
       })
@@ -109,6 +110,7 @@ export default {
         params: {'id': vue.GLOBAL.student.id},
         success: function (data) {
           vue.GLOBAL.student = data.data
+          vue.data = data.data
           vue.getDis()
         }
       })
@@ -130,7 +132,7 @@ export default {
   data () {
     return {
       disabled: true,
-      data: this.GLOBAL.student
+      data: {}
     }
   }
 }
