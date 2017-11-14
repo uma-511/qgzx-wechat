@@ -23,7 +23,7 @@
   
     <group gutter="0">
       <cell    v-for="(item,index) in lists"  style="border-top:0px;">
-       <span slot="title" ><img src="static/woman.png" width="18" height="18" style="vertical-align:middle;"/>&nbsp;&nbsp;<span style="vertical-align:middle;font-size:16px;color:#09BB07">{{item.name}}：<span style="color:black;font-size:14px;">{{item.theme}}</span></span></span>
+       <span slot="title" ><img class="circle" v-bind:src="apiPrefix+'/'+GLOBAL.student.image"   style="vertical-align:middle;width:30px;height:30px;"/>&nbsp;<span style="vertical-align:middle;font-size:16px;color:#09BB07">{{item.name}}：<span style="color:black;font-size:14px;">{{item.theme}}</span></span></span>
        <div slot="inline-desc">
        <div style="font-size:12px;padding-top:2px;padding-bottom:0px;padding-left:25px;color:black;word-break:break-all"><div v-bind:class="{ hiddenDiv: item.content.length>50 && !flag[index]}" >{{item.content}}</div></div>
        <div style="color:#09BB07;padding-left:25px;font-size:12px;padding-top:2px;padding-bottom:2px;"  @click="flagChange(index)"><span v-if="item.content.length>50 && !flag[index]" >全文</span><span v-if="flag[index]" >收起</span></div>
