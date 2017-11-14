@@ -87,7 +87,7 @@ export default {
     if (this.GLOBAL.student.id === '') {
       this.init()
     } else {
-      this.getDis()
+      this.getData()
     }
   },
   methods: {
@@ -96,6 +96,17 @@ export default {
       vue.post({
         url: '/public/api/person/getStuMessage',
         params: {'code': vue.getURLParam('code')},
+        success: function (data) {
+          vue.GLOBAL.student = data.data
+          vue.getDis()
+        }
+      })
+    },
+    getData () {
+      let vue = this
+      vue.post({
+        url: '/public/api/person/getPerStatus',
+        params: {'id': vue.GLOBAL.student.id},
         success: function (data) {
           vue.GLOBAL.student = data.data
           vue.getDis()
