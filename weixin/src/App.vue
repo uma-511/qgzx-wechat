@@ -69,14 +69,6 @@ export default {
       }
     },
     init () {
-      let vue = this
-      vue.post({
-        url: '/public/api/person/getStuMessage',
-        params: {'code': vue.getURLParam('code')},
-        success: function (data) {
-          vue.GLOBAL.student = data.data
-        }
-      })
     }
   },
   data () {
