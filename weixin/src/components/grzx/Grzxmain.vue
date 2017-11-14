@@ -95,7 +95,7 @@ export default {
       let vue = this
       vue.post({
         url: '/public/api/person/getStuMessage',
-        params: {'code': 'ss'},
+        params: {'code': vue.getURLParam('code')},
         success: function (data) {
           vue.GLOBAL.student = data.data
           vue.data = data.data
