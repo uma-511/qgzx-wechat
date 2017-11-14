@@ -84,10 +84,25 @@ export default {
   created: function () {
     // this.closeShowBack()
     this.updateTitle('个人中心')
-    this.init()
+    if (this.GLOBAL.student.id === '') {
+      this.init()
+    } else {
+      this.getDis()
+    }
   },
   methods: {
     init () {
+      let vue = this
+      vue.post({
+        url: '/public/api/person/getStuMessage',
+        params: {'code': vue.getURLParam('code')},
+        success: function (data) {
+          vue.GLOBAL.student = data.data
+          vue.getDis()
+        }
+      })
+    },
+    getDis () {
       let vue = this
       if (vue.GLOBAL.student.status === '正常') {
         if (vue.GLOBAL.student.check_status === '审核通过') {

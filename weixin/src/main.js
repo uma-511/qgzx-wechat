@@ -369,7 +369,7 @@ Vue.prototype.getURLParam = function (strParamName) {
   }
   return strReturn
 }
-var global_ = {student: {'id': 4, 'student_id': '学号', 'openid': 'o-Out1Iy67LhFow6kRlIADP-uqDM', 'name': '姓名', 'sex': 'male', 'college_id': '学院号'}}
+var global_ = {student: {'id': '', 'student_id': '学号', 'openid': 'o-Out1Iy67LhFow6kRlIADP-uqDM', 'name': '姓名', 'sex': 'male', 'college_id': '学院号'}}
 Vue.prototype.GLOBAL = global_
 /* eslint-disable no-new */
 new Vue({
