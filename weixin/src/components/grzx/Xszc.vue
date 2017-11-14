@@ -302,7 +302,7 @@ export default {
       if (vue.data.image === '') {
         vue.$vux.alert.show({
           title: '提示',
-          content: '您还未上传图片'
+          content: '您还未上传头像'
         })
         return
       }
