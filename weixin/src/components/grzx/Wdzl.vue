@@ -208,10 +208,10 @@ export default {
           vue.fridataArr = vue.data.fridata
           vue.satdataArr = vue.data.satdata
           vue.sundataArr = vue.data.sundata
-          vue.images = [{url: vue.data.image}]
+          vue.images = [{url: vue.apiPrefix + '/' + vue.data.image}]
           var imgs = vue.data.attachfiles.split(',')
           for (var img of imgs) {
-            var item = {url: img}
+            var item = {url: vue.apiPrefix + '/' + img}
             vue.attachfiles.push(item)
           }
           console.log('成功')

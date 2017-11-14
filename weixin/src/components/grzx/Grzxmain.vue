@@ -5,7 +5,7 @@
   
    <flexbox v-if="!disabled">
         <flexbox-item :span="1.8">
-          <div class="circle"><img src="static/woman.png" width="35" height="35" style="margin-top:5px;"/></div>
+          <div ><img class="circle" v-bind:src="apiPrefix+'/'+data.image" width="35" height="35" style="margin-top:5px;"/></div>
         </flexbox-item>
          <flexbox-item :span="3" >
           <div style="text-align:left;width:100%;">{{data.stu_name}}

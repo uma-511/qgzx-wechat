@@ -8,7 +8,7 @@
     </tab>
     <group gutter="0">
       
-      <cell  title="2017-09-09"  v-for="item in bqlists"  style="border-top:0px;" v-if="statue.bqShow">
+      <cell  v-for="item in bqlists"  style="border-top:0px;" v-show="statue.bqShow">
       <span slot="title" style="font-size:14px;color:#FF7951"><img src='static/check2.png' width="16" height="16"/>&nbsp;&nbsp;{{item.createtime}}&nbsp;&nbsp;<badge v-bind:text="item.buqian" style="background-color:#09BB07;margin-bottom:5px;" ></badge></span> 
         <div slot="inline-desc"><div style="font-size:10px;padding-bottom:5px;"></div>
        <div style="font-size:12px;color:black;">
@@ -18,13 +18,13 @@
        <div>公司名称：{{item.unit_name}}</div></div>
       	</div>
       </cell>
-      <cell  title="2017-09-09"  v-for="item in wqlists"  style="border-top:0px;" v-if="statue.wqShow">
+      <cell  title="2017-09-09"  v-for="item in wqlists"  style="border-top:0px;" v-show="statue.wqShow">
       <span slot="title" style="font-size:14px;color:#FF7951"><img src='static/car.png' width="18" height="18"/>&nbsp;&nbsp;2017-09-09</span> 
        <div slot="inline-desc"><div style="font-size:10px;padding-bottom:5px;"></div><div style="font-size:12px;color:black;">{{item.ggmc}}</div></div>
        <div slot="default" style="padding-right:10px;"><div style="font-size:14px;padding-bottom:5px;color:black;">外勤1次</div><div style="font-size:10px;">{{item.fbsj}}</div></div>
       	
       </cell>
-            <cell  title="2017-09-09"  v-for="item in qjlists"  style="border-top:0px;" v-if="statue.qjShow">
+            <cell  title="2017-09-09"  v-for="item in qjlists"  style="border-top:0px;" v-show="statue.qjShow">
       <span slot="title" style="font-size:14px;color:#FF7951"><img src='static/rl.png' width="16" height="16" style="vertical-align:middle;"/>&nbsp;&nbsp;<span style="vertical-align:middle;">{{item.createtime}}</span>&nbsp;&nbsp;<badge v-bind:text="item.status" style="background-color:#09BB07;margin-bottom:5px;" ></badge></span> 
        <div slot="inline-desc"><div style="font-size:10px;padding-bottom:5px;"></div>
        <div style="font-size:12px;color:black;">
@@ -36,7 +36,7 @@
       	</div>
       </cell>
       
-      <cell  title="2017-09-09"  v-for="item in jblists"  style="border-top:0px;" v-if="statue.jbShow">
+      <cell  title="2017-09-09"  v-for="item in jblists"  style="border-top:0px;" v-show="statue.jbShow">
       <span slot="title" style="font-size:14px;color:#FF7951"><img src='static/clock.png' width="16" height="16" style="vertical-align:middle;"/>&nbsp;<span style="vertical-align:middle;">2017-09-09</span>&nbsp;&nbsp;<badge text="已批准" style="background-color:#09BB07;margin-bottom:5px;" ></badge></span> 
        <div slot="inline-desc"><div style="font-size:10px;padding-bottom:5px;"></div>
        <div style="font-size:12px;color:black;">
@@ -106,14 +106,22 @@ export default {
         url: '/public/api/person/getApplyRecord',
         params: {student_id: vue.GLOBAL.student.id},
         success: function (data) {
-          vue.bqlists = data.list
+          if (data.list.length > 0) {
+            vue.bqlists = data.list
+          } else {
+            vue.bqlists = null
+          }
         }
       })
       vue.post({
         url: '/public/api/person/getVacateRecord',
         params: {student_id: vue.GLOBAL.student.id},
         success: function (data) {
-          vue.qjlists = data.list
+          if (data.list.length > 0) {
+            vue.qjlists = data.list
+          } else {
+            vue.qjlists = null
+          }
         }
       })
     }
