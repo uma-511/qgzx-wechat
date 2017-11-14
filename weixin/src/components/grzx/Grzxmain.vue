@@ -89,24 +89,13 @@ export default {
   methods: {
     init () {
       let vue = this
-      vue.post({
-        url: '/public/api/person/getPerStatus',
-        params: {'id': vue.GLOBAL.student.id},
-        success: function (data) {
-          vue.GLOBAL.student = data.data
-          vue.data = data.data
-          if (vue.GLOBAL.student.status === '正常') {
-            if (vue.GLOBAL.student.check_status === '审核通过') {
-              vue.disabled = false
-            }
-          } else {
-            vue.disabled = true
-          }
+      if (vue.GLOBAL.student.status === '正常') {
+        if (vue.GLOBAL.student.check_status === '审核通过') {
+          vue.disabled = false
         }
-      })
-    },
-    change () {
-      this.data.starttime = '2016-09-10'
+      } else {
+        vue.disabled = true
+      }
     },
     toZc () {
       this.$router.push({path: '/components/grzx/Xszc'})
@@ -115,7 +104,7 @@ export default {
   data () {
     return {
       disabled: true,
-      data: {}
+      data: this.GLOBAL.student
     }
   }
 }

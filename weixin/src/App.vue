@@ -37,7 +37,6 @@ export default {
   },
   methods: {
     menuTo (index) {
-      console.log('change')
       this.nowIndex = index
       let disabled = false
       if (this.GLOBAL.student.status === '正常') {
