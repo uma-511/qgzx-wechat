@@ -377,7 +377,7 @@ export default {
 <style>
 .demo1-item {
   border: 1px solid #ececec;
-  padding: 5px 15px;
+  padding: 5px 10px;
   margin-bottom:5px;
 }
 .demo1-item-selected {

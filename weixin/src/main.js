@@ -22,9 +22,9 @@ Vue.use(VueRouter)
 /**
  * 定义常量
  */
-const domainName = '5dubgj.natappfree.cc'
-const serverName = '5dubgj.natappfree.cc'
-const apiPrefix = 'http://' + serverName + '/QingongzhuxueSystem-PHP'
+const domainName = 'qgzx.yj880.com'
+const serverName = 'qgzx.yj880.com'
+const apiPrefix = 'http://' + serverName + '/qgzx'
 const loginTimeOutErrorCode = 'login_timeout_error'
 /**
  * 设置vuex
@@ -272,19 +272,23 @@ Vue.prototype.http = function (opts) {
     vue.$vux.loading.hide()
     if (!opts.error) {
       let response = error.response
-      // let errorMessage = '请求失败'
+      let errorMessage = '请求失败'
 
       if (response && response.data) {
         if (response.data.code === loginTimeOutErrorCode) {
           window.location.href = '/'
         }
-        // errorMessage = response.data.message
+        errorMessage = response.data.message
       }
-
-      // vue.$vux.alert.show({
-        // title: '提示',
-        // content: errorMessage
-      // })
+      if (response !== undefined) {
+        if (errorMessage === undefined) {
+          errorMessage = '系统异常，请联系系统管理员'
+        }
+        vue.$vux.alert.show({
+          title: '提示',
+          content: errorMessage
+        })
+      }
     } else {
       opts.error(error.response.data.data)
     }
@@ -369,7 +373,7 @@ Vue.prototype.getURLParam = function (strParamName) {
   }
   return strReturn
 }
-var global_ = {student: {'id': '', 'student_id': '学号', 'openid': 'o-Out1Iy67LhFow6kRlIADP-uqDM', 'name': '姓名', 'sex': 'male', 'college_id': '学院号'}}
+var global_ = {student: {'id': 17, 'student_id': '学号', 'openid': 'o-Out1Iy67LhFow6kRlIADP-uqDM', 'name': '姓名', 'sex': 'male', 'college_id': '学院号'}}
 Vue.prototype.GLOBAL = global_
 /* eslint-disable no-new */
 new Vue({
