@@ -19,7 +19,7 @@
      </box>
      </div>
    <group title="请认真填写以下内容">
-       <datetime v-model="startdate" @on-change="change" title="补签日期" text-align="right"></datetime>
+       <datetime v-model="startdate" @on-change="change" title="补签日期" text-align="right" v-bind:start-date="startdate_s" v-bind:end-date="enddate"></datetime>
        <datetime-range v-model="start_time"  title="到岗时间"  v-bind:start-date="startdate" v-bind:end-date="startdate" text-align="right"></datetime-range>
       	<datetime-range v-model="end_time"  title="离岗时间" v-bind:start-date="startdate" v-bind:end-date="startdate"  text-align="right"></datetime-range>
 		<x-textarea title="补签原因" v-model="data.reason" required text-align="right"></x-textarea>
@@ -50,6 +50,9 @@ export default {
   created: function () {
     // this.closeShowBack()
     this.updateTitle('请假申请')
+    let now = new Date()
+    this.startdate_s = now.getFullYear() + '-01-01'
+    this.enddate = getYstoday()
   },
   methods: {
     change (value) {
@@ -103,11 +106,21 @@ export default {
   data () {
     return {
       startdate: '',
+      enddate: '',
+      startdate_s: '',
       start_time: [],
       end_time: [],
       data: { student_id: this.GLOBAL.student.id, duty_time: '', departure_time: '', reason: '' }
     }
   }
 }
-
+function getYstoday () {
+  let now = new Date()
+  now.setTime(now.getTime() - 24 * 60 * 60 * 1000)
+  let cmonth = now.getMonth() + 1
+  let day = now.getDate()
+  if (cmonth < 10) cmonth = '0' + cmonth
+  if (day < 10) day = '0' + day
+  return now.getFullYear() + '-' + cmonth + '-' + day
+}
 </script>
