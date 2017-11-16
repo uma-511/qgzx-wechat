@@ -128,9 +128,7 @@ export default {
       lists: [],
       nowIndex: -1,
       dropdownActive: false,
-      tabParams: [{key: '0', tabvalue: '岗位性质', value: '岗位性质', dataKey: '-1', menu: [{key: '固定岗', value: '固定岗'}, {key: '临时岗', value: '临时岗'}]},
-      {key: '1', tabvalue: '工作地点', value: '工作地点', dataKey: '-1', menu: [{key: '0', value: '禅城区'}, {key: '1', value: '南海区'}]},
-      {key: '2', tabvalue: '酬薪范围', value: '酬薪范围', dataKey: '-1', menu: [{key: '0', value: '100元以下'}, {key: '1', value: '100-500元'}, {key: '2', value: '500-1000元'}]}]
+      tabParams: [{key: '0', tabvalue: '岗位性质', value: '岗位性质', dataKey: '-1', menu: [{key: '固定岗', value: '固定岗'}, {key: '临时岗', value: '临时岗'}]}]
     }
   }
 }
