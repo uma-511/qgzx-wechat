@@ -49,7 +49,7 @@ export default {
   },
   created: function () {
     // this.closeShowBack()
-    this.updateTitle('请假申请')
+    this.updateTitle('补签申请')
     let now = new Date()
     this.startdate_s = now.getFullYear() + '-01-01'
     this.enddate = getYstoday()
@@ -82,8 +82,19 @@ export default {
         })
         return
       }
-      vue.data.duty_time = vue.start_time[0] + ' ' + vue.start_time[1] + ':' + vue.start_time[2]
-      vue.data.departure_time = vue.end_time[0] + ' ' + vue.end_time[1] + ':' + vue.end_time[2]
+      if (vue.start_time.length > 0) {
+        vue.data.duty_time = vue.start_time[0] + ' ' + vue.start_time[1] + ':' + vue.start_time[2]
+      }
+      if (vue.end_time.length > 0) {
+        vue.data.departure_time = vue.end_time[0] + ' ' + vue.end_time[1] + ':' + vue.end_time[2]
+      }
+      if (vue.data.duty_time > vue.data.departure_time && vue.data.duty_time !== '') {
+        vue.$vux.alert.show({
+          title: '提示',
+          content: '到岗时间不能大于离岗时间'
+        })
+        return
+      }
       vue.$vux.confirm.show({
         title: '提示',
         content: '是否确定提交',

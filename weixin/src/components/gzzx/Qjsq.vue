@@ -87,6 +87,13 @@ export default {
       }
       vue.data.start_time = vue.start_time[0] + ' ' + vue.start_time[1] + ':' + vue.start_time[2]
       vue.data.end_time = vue.end_time[0] + ' ' + vue.end_time[1] + ':' + vue.end_time[2]
+      if (vue.data.start_time > vue.data.end_time) {
+        vue.$vux.alert.show({
+          title: '提示',
+          content: '请假开始时间不能大于结束时间'
+        })
+        return
+      }
       vue.$vux.confirm.show({
         title: '提示',
         content: '是否确定提交',

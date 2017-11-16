@@ -45,7 +45,11 @@ export default {
     this.updateTitle('工作中心')
     if (this.GLOBAL.student.status === '正常') {
       if (this.GLOBAL.student.check_status === '审核通过') {
-        this.disabled = false
+        if (this.GLOBAL.student.work_status === '在岗') {
+          this.disabled = false
+        } else {
+          this.disabled = true
+        }
       } else {
         this.disabled = true
       }

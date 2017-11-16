@@ -33,6 +33,7 @@
         </flexbox-item>
         <flexbox-item>
           <div  style="color:#09BB07;margin-left:30px;width:60px;font-size:12px;border-radius: 10px;font-style:italic;" @click="toZc" v-if="data.status=='正常' && data.check_status=='未注册'">点击注册</div>
+          <div  style="color:#09BB07;margin-left:30px;width:60px;font-size:12px;border-radius: 10px;font-style:italic;" @click="toZc" v-if="data.status=='正常' && data.check_status=='审核不通过'">重新注册</div>
         </flexbox-item>
       </flexbox>
      </box>
