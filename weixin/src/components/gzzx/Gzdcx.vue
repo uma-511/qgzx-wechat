@@ -23,7 +23,7 @@
     </group>
 
      <group title="工资单">
-      <cell  v-for="item in list" v-bind:title="item.rq" :value="'工资：'+item.gz+'元'" is-link link="/components/gzzx/Gzdxq"></cell>
+      <cell  v-for="item in list" v-bind:title="item.rq" :value="'工资：'+item.gz+'元'" is-link @click.native="toDetail(item.rq)"></cell>
     </group>
 
   </div>
@@ -62,6 +62,9 @@ export default {
     },
     startchange () {
       // this.data.starttime = '2016-09-10'
+    },
+    toDetail (rq) {
+      this.$router.push({path: '/components/gzzx/Gzdxq', query: {rq: rq}})
     },
     endchange () {
       let vue = this
