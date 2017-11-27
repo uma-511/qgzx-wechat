@@ -115,7 +115,7 @@ export default {
   },
   data () {
     return {
-      qjlbArr: [{key: '0', value: '事假'}, {key: '1', value: '年假'}, {key: '2', value: '病假'}],
+      qjlbArr: [{key: '0', value: '事假'}, {key: '2', value: '病假'}],
       startdate: getStartDay(),
       enddate: getEndDay(),
       start_time: [],

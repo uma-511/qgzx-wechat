@@ -34,6 +34,11 @@ export default {
   },
   created: function () {
     this.updateTitle('我要建议')
+    this.options.push({key: '0', value: '勤工助学管理中心'})
+    this.options.push({key: '1', value: this.GLOBAL.student.col_name})
+    if (this.GLOBAL.student.work_status === '在岗') {
+      this.options.push({key: '2', value: this.GLOBAL.student.unit_name})
+    }
   },
   methods: {
     jytj () {
@@ -75,7 +80,7 @@ export default {
   data () {
     return {
       data: {student_id: this.GLOBAL.student.id, 'option_title': '', 'option_content': '', receiver: '0'},
-      options: [{key: '0', value: '学校'}, {key: '1', value: '学院'}, {key: '2', value: '用人单位'}]
+      options: []
     }
   }
 }

@@ -16,6 +16,7 @@
           <div class="textcell" @click="onClickDetail">查看记录</div>
         </flexbox-item>
       </flexbox>
+      <div style="margin-top:2px;"> <div style="font-size:12px;margin-bottom:2px;">任职公司：{{GLOBAL.student.lqsj}}</div></div>
      </box>
      </div>
    <group title="请认真填写以下内容">
@@ -50,8 +51,7 @@ export default {
   created: function () {
     // this.closeShowBack()
     this.updateTitle('补签申请')
-    let now = new Date()
-    this.startdate_s = now.getFullYear() + '-01-01'
+    this.startdate_s = this.GLOBAL.student.lqsj
     this.enddate = getYstoday()
   },
   methods: {

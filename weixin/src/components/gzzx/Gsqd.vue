@@ -7,11 +7,11 @@
         <flexbox-item :span="1.8">
           <div><img class="circle" v-bind:src="apiPrefix+'/'+GLOBAL.student.image" width="35" height="35" style="margin-top:5px;"/></div>
         </flexbox-item>
-         <flexbox-item :span="3" >
+         <flexbox-item :span="5" >
           <div style="text-align:left;width:100%;">{{data.stu_name}}</div>
         </flexbox-item>
         <flexbox-item>
-          <div class="textcell">日期：{{data.current_time}}</div>
+          <div class="textcell" @click="toDetail(data.current_time)">今日签到记录</div>
         </flexbox-item>
       </flexbox>
      <div style="margin-top:10px;"> <div style="font-size:12px;margin-bottom:2px;">任职公司：{{data.unit_name}}</div></div>
@@ -19,6 +19,7 @@
      </div>
     <div style="background-color:#FFFFFF;margin-top:10px;margin-bottom:50px;border-top:1px solid #EEEEEE;border-bottom:1px solid #EEEEEE">
     <box gap="10px 10px">
+    <div  >日期：{{data.current_time}}</div>
       <flexbox :gutter="0" wrap="wrap">
        <flexbox-item :span="3">
       	 <flow orientation="vertical" style="height:200px;">
@@ -101,6 +102,9 @@ export default {
           vue.data = data.data
         }
       })
+    },
+    toDetail (rq) {
+      this.$router.push({path: '/components/gzzx/Gsqdlist', query: {today: rq}})
     },
     dgqd () {
       let vue = this

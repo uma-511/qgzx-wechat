@@ -28,8 +28,8 @@
        
       <cell is-link title="岗位名称"  v-for="item in lists"  inline-desc='公司名称' style="border-top:0px;"  @click.native="onClickDetail(item.id)">
        <span slot="title" ><span style="vertical-align:middle;">{{item.job_name}}</span> <badge v-bind:text="item.quality.substring(0,1)"  v-if="item.quality=='临时岗'" style="background-color:#FF7951;"></badge><badge v-bind:text="item.quality.substring(0,1)"  v-if="item.quality=='固定岗'" style="background-color:#09BB07;"></badge></span>
-       <div slot="inline-desc"><div style="font-size:10px;padding-bottom:10px;">{{item.address}}</div><div style="font-size:14px;color:black;">{{item.unit_name}}</div></div>
-       <div slot="default" style="padding-right:10px;"><div style="font-size:14px;padding-bottom:5px;color:black;">面议</div><div style="font-size:14px;">{{item.release_time}}</div></div>
+       <div slot="inline-desc"><div style="font-size:10px;padding-bottom:5px;">{{item.address}}</div><div style="font-size:14px;color:black;">{{item.unit_name}}</div></div>
+       <div slot="default" style="padding-right:10px;"><div style="font-size:14px;padding-bottom:5px;color:black;">面议</div><div style="font-size:10px;">招聘人数：{{item.p_number}}</div><div style="font-size:12px;">{{item.release_time}}</div></div>
       	
       </cell>
     </group>

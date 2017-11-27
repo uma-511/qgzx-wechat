@@ -18,6 +18,7 @@
 	 	<p >发布单位：{{data.apartment}}</p>
 	 		<p >发布时间：{{data.release_time}}</p>
 	 		<p >工作地址：{{data.address}}</p>
+	 		<p>招聘人数：{{data.p_number}}</p>
 	 		<p>公司名称：{{data.unit_name}}</p>
 	 	</div>
 	 </div>	 	

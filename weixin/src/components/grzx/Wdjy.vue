@@ -17,10 +17,12 @@
   
     <group gutter="0">
       <cell    v-for="(item,index) in lists"  style="border-top:0px;">
-       <span slot="title" ><img src="static/mytalk.png" width="18" height="18" style="vertical-align:middle;"/>&nbsp;&nbsp;<span style="vertical-align:middle;font-size:16px;color:#09BB07">{{item.option_title}}</span></span>
+       <span slot="title" ><img src="static/mytalk.png" width="12" height="12" style="vertical-align:middle;"/>&nbsp;<span style="vertical-align:middle;font-size:16px;color:#09BB07">{{item.option_title}}</span>
+       <span style="font-size:12px;vertical-align:middle;color:#666;">{{'@'+item.receiver}}</span>
+       </span>
        <div slot="inline-desc">
-       <div style="font-size:12px;padding-top:2px;padding-bottom:0px;padding-left:25px;color:black;word-break:break-all"><div v-bind:class="{ hiddenDiv: item.option_content.length>50 && !flag[index]}" >{{item.option_content}}</div></div>
-       <div style="color:#09BB07;padding-left:25px;font-size:12px;padding-top:2px;padding-bottom:2px;"  @click="flagChange(index)"><span v-if="item.option_content.length>50 && !flag[index]" >全文</span><span v-if="flag[index]" >收起</span></div>
+       <div style="font-size:12px;padding-top:2px;padding-bottom:0px;padding-left:18px;color:black;word-break:break-all"><div v-bind:class="{ hiddenDiv: item.option_content.length>50 && !flag[index]}" >{{item.option_content}}</div></div>
+       <div style="color:#09BB07;padding-left:18px;font-size:12px;padding-top:2px;padding-bottom:2px;"  @click="flagChange(index)"><span v-if="item.option_content.length>50 && !flag[index]" >全文</span><span v-if="flag[index]" >收起</span></div>
        <div style="font-size:10px;width:100%;text-align:right;">{{item.createtime}}</div>
         <div style="background-color:#EFEFF4;margin-left:25px;font-size:12px;padding:6px;border-radius: 5px;margin-top:2px;" v-if="item.zhuangtai=='已回复'">
         <div><span style="color:#09BB07;">回复：</span><span>{{item.content}}</span></div>

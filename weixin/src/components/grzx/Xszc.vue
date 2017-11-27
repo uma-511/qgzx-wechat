@@ -1,16 +1,16 @@
 <template>
 	<div class="contentDiv">
 	  <group>
-    	<x-input title="姓名：" v-model="data.name" required placeholder="请输入" text-align="right"></x-input>
-    	<selector title="性别：" v-model="data.sex" :options="options" placeholder="请选择"  direction="rtl" ></selector>
-    	<selector title="民族：" v-model="data.nation" :options="mzArr"   direction="rtl" ></selector>
-    	<x-input title="联系电话：" v-model="data.tel" required placeholder="请输入"  text-align="right"></x-input>
-    	<x-input title="学号：" v-model="data.student_xh" required placeholder="请输入"  text-align="right"></x-input>
-    	<selector title="学院：" v-model="data.college_id" :options="xybhArr"   direction="rtl" ></selector>
-   <selector title="参保情况：" v-model="data.medicaldata" :options="medicalArr"   direction="rtl" ></selector>
-    <selector title="参保情况1：" v-model="data.accidentdata" :options="accidentArr"   direction="rtl" ></selector>
+    	<x-input title="姓名：" v-model="data.name" required placeholder="请输入" text-align="right"><div slot="label"><span style="color:red;">*&nbsp;</span>姓名：</div></x-input>
+    	<selector title="<div><span style='color:red;'>*&nbsp;</span>性别：</div>" v-model="data.sex" :options="options" placeholder="请选择"  direction="rtl" ></selector>
+    	<selector title="<div><span style='color:red;'>*&nbsp;</span>民族：</div>" v-model="data.nation" :options="mzArr"   direction="rtl" ><div slot="label"><span style="color:red;">*&nbsp;</span>名族：</div></selector>
+    	<x-input title="联系电话：" v-model="data.tel" required placeholder="请输入"  text-align="right"><div slot="label"><span style="color:red;">*&nbsp;</span>联系电话：</div></x-input>
+    	<x-input title="学号：" v-model="data.student_xh" required placeholder="请输入"  text-align="right"><div slot="label"><span style="color:red;">*&nbsp;</span>学号：</div></x-input>
+    	<selector title="<div><span style='color:red;'>*&nbsp;</span>学院：</div>" v-model="data.college_id" :options="xybhArr"   direction="rtl" ></selector>
+   <selector title="<div><span style='color:red;'>*&nbsp;</span>参保情况：</div>" v-model="data.medicaldata" :options="medicalArr"   direction="rtl" ></selector>
+    <selector title="<div><span style='color:red;'>*&nbsp;</span>参保情况1:</div>" v-model="data.accidentdata" :options="accidentArr"   direction="rtl" ></selector>
        <cell title="意向岗位:">
-       <div slot="title" style="">意向岗位：<span style="font-size:12px;">（一年级学生主要安排劳务型工作）</span></div>
+       <div slot="title" style=""><span style="color:red;">*&nbsp;</span>意向岗位：<span style="font-size:12px;">（一年级学生主要安排劳务型工作）</span></div>
        <div slot="inline-desc" style="margin-top:10px;">
            <checker v-model="jobdataArr" type="checkbox" default-item-class="demo1-item" selected-item-class="demo1-item-selected">
         <checker-item :value="1">劳务性</checker-item>
@@ -21,6 +21,7 @@
   	  </cell>
   	  <x-textarea title="勤工助学经历:" v-model="data.experience" ></x-textarea>
   	         <cell title="勤工助学时间:">
+  	         <div slot="title" ><span style="color:red;">*&nbsp;</span>勤工助学时间:</div>
        <div slot="inline-desc" style="margin-top:10px;">
      <tab :line-width="1" custom-bar-width="40px"  style="margin-bottom:10px;">
         <tab-item selected @on-item-click="handler('周一')">周一</tab-item>
@@ -118,10 +119,11 @@
     :readonly="false"
     :upload-url="uploadUrl"
     size="small" 
-    title="头像（请上传小一寸免冠照）" 
+    title="<div><span style='color:red;'>*&nbsp;</span>头像（请上传小一寸免冠照）</div>" 
     @preview="previewMethod"
     @add-image="addImageMethod"
   ></uploader>
+  <!--
          <uploader
     :max="max"
     :images="attachfiles"
@@ -135,6 +137,7 @@
     @add-image="addImageMethod"
     @remove-image="removeImageMethod"
   ></uploader>
+  -->
        	   	  <div style="width:100%;text-align:center;">
 <x-button  style="width:90%;margin-top:20px;margin-bottom:20px;"  mini type="primary" @click.native="zc">注册</x-button>
   	  </div>
@@ -217,7 +220,7 @@ export default {
       if (vue.data.name === '') {
         vue.$vux.alert.show({
           title: '提示',
-          content: '您还未填写名字'
+          content: '您还未填写姓名'
         })
         return
       } else if (vue.data.tel === '') {
@@ -293,6 +296,13 @@ export default {
       }
       if (vue.data.sundata !== '') {
         vue.data.sundata = vue.data.sundata.substring(0, vue.data.sundata.length - 1)
+      }
+      if (vue.data.mondata === '' && vue.data.tuedata === '' && vue.data.weddata === '' && vue.data.thudata === '' && vue.data.fridata === '' && vue.data.satdata === '' && vue.data.sundata === '') {
+        vue.$vux.alert.show({
+          title: '提示',
+          content: '您还未选择勤工助学 时间'
+        })
+        return
       }
       for (var img of vue.images) {
         var url = ''
@@ -377,7 +387,7 @@ export default {
 <style>
 .demo1-item {
   border: 1px solid #ececec;
-  padding: 5px 10px;
+  padding: 5px 8px;
   margin-bottom:5px;
 }
 .demo1-item-selected {
